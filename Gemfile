@@ -67,3 +67,5 @@ end
 gem "dalli", "~> 5.0"
 
 gem "sidekiq", "~> 8.1"
+
+gem "rspec-rails", "~> 8.0"
