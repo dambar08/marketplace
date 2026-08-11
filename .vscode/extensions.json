@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "rebornix.ruby",
+    "dbaeumer.vscode-eslint",
+    "github.codespaces",
+    "koichisasada.vscode-rdbg",
+    "marcoroth.herb-lsp",
+    "ms-azuretools.vscode-containers",
+    "shopify.ruby-extensions-pack",
+    "shopify.ruby-lsp",
+  ]
+}
