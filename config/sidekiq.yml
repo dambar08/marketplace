@@ -1,0 +1,8 @@
+:concurrency: <%= ENV.fetch("SIDEKIQ_CONCURRENCY", 10) %>
+
+:queues:
+  - high
+  - medium
+  - default
+  - mailers
+  - low
