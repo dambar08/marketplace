@@ -51,6 +51,8 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+  gem "rspec-rails", "~> 8.0"
+  gem "factory_bot_rails", "~> 6.5"
 end
 
 group :development do
@@ -65,7 +67,6 @@ group :test do
 end
 
 gem "dalli", "~> 5.0"
-
 gem "sidekiq", "~> 8.1"
+gem "pundit", "~> 2.5"
 
-gem "rspec-rails", "~> 8.0"
