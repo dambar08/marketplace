@@ -1,0 +1,2 @@
+class FulfillmentLabel < ApplicationRecord
+end

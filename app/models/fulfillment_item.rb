@@ -1,0 +1,2 @@
+class FulfillmentItem < ApplicationRecord
+end
