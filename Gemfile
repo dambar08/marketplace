@@ -70,3 +70,4 @@ end
 gem "dalli", "~> 5.0"
 gem "sidekiq", "~> 8.1"
 gem "pundit", "~> 2.5"
+gem "friendly_id", "~> 5.7"
