@@ -105,7 +105,7 @@ GEM
     crass (1.0.7)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
-    dalli (5.0.6)
+    dalli (5.1.1)
       logger
     date (3.5.1)
     debug (1.11.1)
@@ -410,7 +410,7 @@ DEPENDENCIES
   bundler-audit
   capybara
   cssbundling-rails
-  dalli (~> 5.0)
+  dalli (~> 5.1)
   debug
   dotenv-rails (~> 3.2)
   factory_bot_rails (~> 6.5)

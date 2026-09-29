@@ -67,7 +67,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "dalli", "~> 5.0"
+gem "dalli", "~> 5.1"
 gem "sidekiq", "~> 8.1"
 gem "pundit", "~> 2.5"
 gem "friendly_id", "~> 5.7"
