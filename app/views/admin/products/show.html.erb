@@ -18,12 +18,12 @@
     <h2 class="font-medium">Options</h2>
     <ul class="mt-3 space-y-3">
       <% @product.options.each do |option| %>
-        <li class="rounded-lg border border-stone-200 bg-white px-4 py-3">
+        <li class="rounded-2xl border border-stone-200 bg-white px-5 py-4 shadow-sm">
           <p class="font-medium"><%= option.title %></p>
           <p class="text-sm text-stone-500"><%= option.values.join(", ") %></p>
           <%= form_with model: option, url: admin_product_option_path(@product, option), method: :patch, class: "mt-3 flex gap-2" do |form| %>
-            <%= form.text_field :title, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
-            <%= form.text_field :values, value: option.values.join(", "), class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+            <%= form.text_field :title, class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
+            <%= form.text_field :values, value: option.values.join(", "), class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
             <%= form.submit "Save option", class: "text-sm" %>
           <% end %>
           <%= button_to "Remove option", admin_product_option_path(@product, option), method: :delete, class: "mt-2 text-sm text-red-700" %>
@@ -31,9 +31,9 @@
       <% end %>
     </ul>
     <%= form_with model: ProductOption.new, url: admin_product_options_path(@product), class: "mt-4 flex gap-2" do |form| %>
-      <%= form.text_field :title, placeholder: "Title", required: true, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
-      <%= form.text_field :values, placeholder: "Blue, Green", class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
-      <%= form.submit "Add option", class: "rounded-lg bg-stone-950 px-3 py-2 text-sm text-white" %>
+      <%= form.text_field :title, placeholder: "Title", required: true, class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
+      <%= form.text_field :values, placeholder: "Blue, Green", class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
+      <%= form.submit "Add option", class: "rounded-xl bg-stone-950 px-4 py-2.5 text-sm font-medium text-white" %>
     <% end %>
   </section>
   <section class="mt-8">
@@ -43,7 +43,7 @@
     <% end %>
     <ul class="mt-3 space-y-4">
       <% @product.variants.each do |variant| %>
-        <li id="variant-<%= variant.id %>" class="rounded-lg border border-stone-200 bg-white px-4 py-3">
+        <li id="variant-<%= variant.id %>" class="rounded-2xl border border-stone-200 bg-white px-5 py-4 shadow-sm">
           <p class="font-medium"><%= variant.title %></p>
           <p class="text-sm text-stone-500"><%= variant.sku %></p>
           <p class="text-sm text-stone-500">Stock <%= variant.inventory_quantity %></p>
@@ -56,8 +56,8 @@
               <li>
                 <p><%= format_money(price.amount, price.currency) %></p>
                 <%= form_with model: price, url: admin_product_variant_price_path(@product, variant, price), method: :patch, class: "mt-1 flex gap-2" do |form| %>
-                  <%= form.number_field :amount, step: "0.01", class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
-                  <%= form.text_field :currency, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+                  <%= form.number_field :amount, step: "0.01", class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
+                  <%= form.text_field :currency, class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
                   <%= form.submit "Save price", class: "text-sm" %>
                 <% end %>
                 <%= button_to "Remove price", admin_product_variant_price_path(@product, variant, price), method: :delete, class: "text-sm text-red-700" %>
@@ -65,19 +65,19 @@
             <% end %>
           </ul>
           <%= form_with model: ProductVariantPrice.new, url: admin_product_variant_prices_path(@product, variant), class: "mt-2 flex gap-2" do |form| %>
-            <%= form.number_field :amount, step: "0.01", placeholder: "Amount", required: true, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
-            <%= form.text_field :currency, placeholder: "USD", required: true, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+            <%= form.number_field :amount, step: "0.01", placeholder: "Amount", required: true, class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
+            <%= form.text_field :currency, placeholder: "USD", required: true, class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
             <%= form.submit "Add price", class: "text-sm" %>
           <% end %>
           <%= form_with model: variant, url: admin_product_variant_path(@product, variant), method: :patch, class: "mt-3 space-y-2" do |form| %>
-            <%= form.text_field :title, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
-            <%= form.text_field :sku, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
-            <%= form.number_field :inventory_quantity, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+            <%= form.text_field :title, class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
+            <%= form.text_field :sku, class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
+            <%= form.number_field :inventory_quantity, class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
             <%= form.label :allow_backorder, "Allow backorder", class: "text-sm" %>
             <%= form.check_box :allow_backorder %>
             <% @product.options.each do |option| %>
               <%= form.label "chosen_values_#{option.title}", option.title, class: "block text-sm" %>
-              <%= select_tag "product_variant[chosen_values][#{option.title}]", options_for_select(option.values, variant.options[option.title]), include_blank: true, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+              <%= select_tag "product_variant[chosen_values][#{option.title}]", options_for_select(option.values, variant.options[option.title]), include_blank: true, class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
             <% end %>
             <%= form.submit "Save variant", class: "text-sm" %>
           <% end %>
@@ -86,13 +86,13 @@
       <% end %>
     </ul>
     <%= form_with model: ProductVariant.new, url: admin_product_variants_path(@product), class: "mt-4 space-y-2" do |form| %>
-      <%= form.text_field :title, placeholder: "Title", required: true, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
-      <%= form.text_field :sku, placeholder: "SKU", class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+      <%= form.text_field :title, placeholder: "Title", required: true, class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
+      <%= form.text_field :sku, placeholder: "SKU", class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
       <% @product.options.each do |option| %>
         <%= form.label "chosen_values_#{option.title}", option.title, class: "block text-sm" %>
-        <%= select_tag "product_variant[chosen_values][#{option.title}]", options_for_select(option.values), include_blank: true, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+        <%= select_tag "product_variant[chosen_values][#{option.title}]", options_for_select(option.values), include_blank: true, class: "rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm" %>
       <% end %>
-      <%= form.submit "Add variant", class: "rounded-lg bg-stone-950 px-3 py-2 text-sm text-white" %>
+      <%= form.submit "Add variant", class: "rounded-xl bg-stone-950 px-4 py-2.5 text-sm font-medium text-white" %>
     <% end %>
   </section>
   <%= link_to "Edit", edit_admin_product_path(@product), class: "mt-6 inline-block text-sm underline" %>

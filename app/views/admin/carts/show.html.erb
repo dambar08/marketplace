@@ -19,7 +19,7 @@
     <%= button_to "Remove code", admin_cart_path(@cart), method: :patch, params: { promotion_id: "" }, class: "mt-2 text-sm text-red-700" %>
   <% else %>
     <%= form_with url: admin_cart_path(@cart), method: :patch, class: "mt-4 flex gap-2" do |form| %>
-      <%= form.collection_select :promotion_id, @promotions, :id, :code, { include_blank: "Code" }, name: "promotion_id", class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+      <%= form.collection_select :promotion_id, @promotions, :id, :code, { include_blank: "Code" }, name: "promotion_id", class: admin_field_class %>
       <%= form.submit "Attach code", class: "text-sm" %>
     <% end %>
   <% end %>

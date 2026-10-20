@@ -23,9 +23,9 @@
 
   <%= form_with url: admin_fulfillment_path(@fulfillment), method: :patch, class: "mt-8 space-y-3" do |form| %>
     <%= form.label :status, "Status", class: "block text-sm font-medium" %>
-    <%= form.select :status, [ [ "Packed", "packed" ], [ "Shipped", "shipped" ], [ "Delivered", "delivered" ], [ "Cancelled", "cancelled" ] ], {}, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+    <%= form.select :status, [ [ "Packed", "packed" ], [ "Shipped", "shipped" ], [ "Delivered", "delivered" ], [ "Cancelled", "cancelled" ] ], {}, class: admin_field_class %>
     <%= form.label :tracking_number, "Tracking", class: "block text-sm font-medium" %>
-    <%= form.text_field :tracking_number, class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
-    <%= form.submit "Record status", class: "rounded-lg bg-stone-950 px-3 py-2 text-sm text-white" %>
+    <%= form.text_field :tracking_number, class: admin_field_class %>
+    <%= form.submit "Record status", class: admin_button_class %>
   <% end %>
 </div>
