@@ -33,6 +33,7 @@ Rails 8.1 app. Ruby is `3.4.7` (`.ruby-version`; keep the Dockerfile `RUBY_VERSI
 - `Cart` `has_many :line_items` (`LineItem`). `cart_line_items` / `CartLineItem` is a separate empty model. Do not treat them as one association.
 - Pundit is installed. `ApplicationPolicy` denies by default and is not included in `ApplicationController`.
 - Schema source is `db/schema.rb`. Change migrations, then let Rails dump the schema. Deploy with Kamal (`bin/kamal`, `config/deploy.yml`); the production image is the root `Dockerfile`, not Compose.
+- Kubernetes: chart at `helm/marketplace`. Thruster listens on `HTTP_PORT` 8080. `helm upgrade --install marketplace ./helm/marketplace --set rails.masterKey=$RAILS_MASTER_KEY --set image.repository=<registry>/marketplace --set image.tag=<tag>`.
 
 ## Agent skills
 
