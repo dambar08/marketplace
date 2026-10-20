@@ -1,0 +1,33 @@
+<% content_for :title, @customer.email_address %>
+
+<div class="mx-auto max-w-3xl px-6 py-8">
+  <h1 class="text-2xl font-semibold tracking-tight"><%= @customer.email_address %></h1>
+  <p class="mt-2 text-sm text-stone-500"><%= @customer.admin? ? "Admin" : "Customer" %></p>
+  <%= button_to(@customer.admin? ? "Demote" : "Promote", admin_customer_path(@customer), method: :patch, params: { user: { admin: (!@customer.admin?).to_s } }, class: "mt-4 text-sm underline") %>
+
+  <section class="mt-8">
+    <h2 class="font-medium">Carts</h2>
+    <% if @customer.carts.none? %>
+      <p class="mt-2 text-sm text-stone-500">No carts</p>
+    <% else %>
+      <ul class="mt-2 space-y-1">
+        <% @customer.carts.each do |cart| %>
+          <li><%= link_to "Cart #{cart.id}", admin_cart_path(cart), class: "text-sm underline" %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="font-medium">Orders</h2>
+    <% if @customer.orders.none? %>
+      <p class="mt-2 text-sm text-stone-500">No orders</p>
+    <% else %>
+      <ul class="mt-2 space-y-1">
+        <% @customer.orders.each do |order| %>
+          <li><%= link_to "Order #{order.id}", admin_order_path(order), class: "text-sm underline" %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+</div>

@@ -1,0 +1,21 @@
+<% content_for :title, "Order #{@order.id}" %>
+
+<div class="mx-auto max-w-3xl px-6 py-8">
+  <h1 class="text-2xl font-semibold tracking-tight">Order <%= @order.id %></h1>
+  <% if @order.items.none? %>
+    <p class="mt-4 text-sm text-stone-500">No lines</p>
+  <% else %>
+    <ul class="mt-4 divide-y divide-stone-200 rounded-xl border border-stone-200 bg-white">
+      <% @order.items.each do |item| %>
+        <li class="px-5 py-3">
+          <p class="font-medium"><%= item.title %></p>
+          <p class="text-sm text-stone-500">Qty <%= item.quantity %></p>
+          <p class="text-sm text-stone-500"><%= number_with_precision(item.unit_price, precision: 2) %></p>
+          <p class="text-sm text-stone-500">Line <%= number_with_precision(item.total, precision: 2) %></p>
+        </li>
+      <% end %>
+    </ul>
+    <p class="mt-4 text-sm">Subtotal <%= number_with_precision(@order.subtotal, precision: 2) %></p>
+    <p class="text-sm">Total <%= number_with_precision(@order.total, precision: 2) %></p>
+  <% end %>
+</div>

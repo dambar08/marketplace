@@ -29,6 +29,27 @@ RSpec.describe "Admin dashboard" do
     expect(response).to redirect_to(new_session_path)
   end
 
+  it "links totals, low stock, and captured payments into the console" do
+    create(:user, email_address: "admin@example.com", admin: true)
+    product = Product.create!(title: "Ceramic mug")
+    variant = ProductVariant.create!(product: product, title: "Blue", inventory_quantity: 2)
+    PaymentCollection.create!(amount: 10, captured_amount: 10, currency_code: "USD", status: "captured")
+    sign_in_as("admin@example.com")
+
+    get admin_root_path
+
+    expect(response.body).to include(%(href="#{admin_products_path}"))
+    expect(response.body).to include(%(href="#{admin_orders_path}"))
+    expect(response.body).to include(%(href="#{admin_customers_path}"))
+    expect(response.body).to include(%(href="#{admin_carts_path}"))
+    expect(response.body).to include(%(href="#{admin_promotions_path}"))
+    expect(response.body).to include(%(href="#{admin_fulfillments_path}"))
+    expect(response.body).to include(%(href="#{admin_payments_path}"))
+    expect(response.body).to include(%(href="#{admin_product_path(product)}#variant-#{variant.id}"))
+    expect(response.body).to include("Dashboard")
+    expect(response.body).to include("USD 10.00")
+  end
+
   it "sends the root path to the admin dashboard" do
     get root_path
 

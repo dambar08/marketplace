@@ -10,18 +10,18 @@
   </header>
 
   <section class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4" aria-label="Totals">
-    <%= render "admin/dashboard/stat", label: "Products", value: number_with_delimiter(@dashboard.product_count), hint: products_without_variants_hint %>
-    <%= render "admin/dashboard/stat", label: "Variants", value: number_with_delimiter(@dashboard.variant_count) %>
-    <%= render "admin/dashboard/stat", label: "Orders", value: number_with_delimiter(@dashboard.order_count) %>
-    <%= render "admin/dashboard/stat", label: "Customers", value: number_with_delimiter(@dashboard.user_count) %>
-    <%= render "admin/dashboard/stat", label: "Carts", value: number_with_delimiter(@dashboard.cart_count) %>
-    <%= render "admin/dashboard/stat", label: "Promotions", value: number_with_delimiter(@dashboard.promotion_count) %>
-    <%= render "admin/dashboard/stat", label: "Awaiting shipment", value: number_with_delimiter(@dashboard.awaiting_shipment_count) %>
+    <%= render "admin/dashboard/stat", label: "Products", value: number_with_delimiter(@dashboard.product_count), hint: products_without_variants_hint, path: admin_products_path %>
+    <%= render "admin/dashboard/stat", label: "Variants", value: number_with_delimiter(@dashboard.variant_count), path: admin_products_path %>
+    <%= render "admin/dashboard/stat", label: "Orders", value: number_with_delimiter(@dashboard.order_count), path: admin_orders_path %>
+    <%= render "admin/dashboard/stat", label: "Customers", value: number_with_delimiter(@dashboard.user_count), path: admin_customers_path %>
+    <%= render "admin/dashboard/stat", label: "Carts", value: number_with_delimiter(@dashboard.cart_count), path: admin_carts_path %>
+    <%= render "admin/dashboard/stat", label: "Promotions", value: number_with_delimiter(@dashboard.promotion_count), path: admin_promotions_path %>
+    <%= render "admin/dashboard/stat", label: "Awaiting shipment", value: number_with_delimiter(@dashboard.awaiting_shipment_count), path: admin_fulfillments_path %>
     <% if @dashboard.captured_by_currency.blank? %>
-      <%= render "admin/dashboard/stat", label: "Captured", value: "—" %>
+      <%= render "admin/dashboard/stat", label: "Captured", value: "—", path: admin_payments_path %>
     <% else %>
       <% @dashboard.captured_by_currency.each do |currency, amount| %>
-        <%= render "admin/dashboard/stat", label: "Captured", value: format_money(amount, currency) %>
+        <%= render "admin/dashboard/stat", label: "Captured", value: format_money(amount, currency), path: admin_payments_path %>
       <% end %>
     <% end %>
   </section>
@@ -36,7 +36,7 @@
           <% @dashboard.recent_products.each do |product| %>
             <li class="flex items-center justify-between gap-4 px-5 py-3">
               <div class="min-w-0">
-                <p class="truncate font-medium"><%= product.title %></p>
+                <p class="truncate font-medium"><%= link_to product.title, admin_product_path(product) %></p>
                 <p class="text-sm text-stone-500"><%= pluralize(product.variants.size, "variant") %></p>
               </div>
               <p class="shrink-0 text-sm text-stone-400"><%= time_ago_in_words(product.created_at) %> ago</p>
@@ -97,8 +97,8 @@
             <tbody class="divide-y divide-stone-100">
               <% @dashboard.low_stock_variants.each do |variant| %>
                 <tr>
-                  <td class="px-5 py-3 font-medium"><%= variant.title %></td>
-                  <td class="px-5 py-3 text-stone-500"><%= variant.product.title %></td>
+                  <td class="px-5 py-3 font-medium"><%= link_to variant.title, admin_product_path(variant.product, anchor: "variant-#{variant.id}") %></td>
+                  <td class="px-5 py-3 text-stone-500"><%= link_to variant.product.title, admin_product_path(variant.product) %></td>
                   <td class="px-5 py-3 text-right <%= variant.inventory_quantity.to_i.zero? ? "text-red-700" : "text-amber-700" %>"><%= variant.inventory_quantity %></td>
                 </tr>
               <% end %>

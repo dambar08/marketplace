@@ -1,4 +1,6 @@
 class Cart < ApplicationRecord
+  belongs_to :user, optional: true
+  belongs_to :promotion, optional: true
   has_many :line_items, class_name: "LineItem", dependent: :destroy
 
   def add_line(title:, unit_price:, quantity: 1)
@@ -23,6 +25,11 @@ class Cart < ApplicationRecord
     refresh_totals!
   end
 
+  def apply_promotion(promotion)
+    update!(promotion: promotion)
+    refresh_totals!
+  end
+
   private
 
   def find_line(line)
@@ -36,9 +43,10 @@ class Cart < ApplicationRecord
 
   def refresh_totals!
     sum = line_items.sum(:total)
+    adjustment = promotion&.value || 0
     update!(
       subtotal: sum,
-      total: sum,
+      total: [ sum - adjustment, 0 ].max,
       original_item_subtotal: sum,
       original_item_total: sum
     )

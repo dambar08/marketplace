@@ -1,0 +1,26 @@
+<% content_for :title, "Cart #{@cart.id}" %>
+
+<div class="mx-auto max-w-3xl px-6 py-8">
+  <h1 class="text-2xl font-semibold tracking-tight">Cart <%= @cart.id %></h1>
+  <ul class="mt-6 divide-y divide-stone-200 rounded-xl border border-stone-200 bg-white">
+    <% @cart.line_items.each do |line| %>
+      <li class="px-5 py-3">
+        <p class="font-medium"><%= line.title %></p>
+        <p class="text-sm text-stone-500">Qty <%= line.quantity %></p>
+        <p class="text-sm text-stone-500"><%= number_with_precision(line.unit_price, precision: 2) %></p>
+        <p class="text-sm text-stone-500"><%= number_with_precision(line.total, precision: 2) %></p>
+      </li>
+    <% end %>
+  </ul>
+  <p class="mt-4 text-sm">Subtotal <%= number_with_precision(@cart.subtotal, precision: 2) %></p>
+  <p class="text-sm">Total <%= number_with_precision(@cart.total, precision: 2) %></p>
+  <% if @cart.promotion %>
+    <p class="mt-2 text-sm">Code <%= @cart.promotion.code %></p>
+    <%= button_to "Remove code", admin_cart_path(@cart), method: :patch, params: { promotion_id: "" }, class: "mt-2 text-sm text-red-700" %>
+  <% else %>
+    <%= form_with url: admin_cart_path(@cart), method: :patch, class: "mt-4 flex gap-2" do |form| %>
+      <%= form.collection_select :promotion_id, @promotions, :id, :code, { include_blank: "Code" }, name: "promotion_id", class: "rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+      <%= form.submit "Attach code", class: "text-sm" %>
+    <% end %>
+  <% end %>
+</div>

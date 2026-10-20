@@ -1,0 +1,10 @@
+<% content_for :title, "Carts" %>
+
+<div class="mx-auto max-w-5xl px-6 py-8">
+  <h1 class="text-2xl font-semibold tracking-tight">Carts</h1>
+  <ul class="mt-6 divide-y divide-stone-200 rounded-xl border border-stone-200 bg-white">
+    <% @carts.each do |cart| %>
+      <li class="px-5 py-3"><%= link_to "Cart #{cart.id}", admin_cart_path(cart), class: "font-medium" %></li>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,12 @@
+<% content_for :title, "Customers" %>
+
+<div class="mx-auto max-w-5xl px-6 py-8">
+  <h1 class="text-2xl font-semibold tracking-tight">Customers</h1>
+  <ul class="mt-6 divide-y divide-stone-200 rounded-xl border border-stone-200 bg-white">
+    <% @customers.each do |customer| %>
+      <li class="px-5 py-3">
+        <%= link_to customer.email_address, admin_customer_path(customer), class: "font-medium" %>
+      </li>
+    <% end %>
+  </ul>
+</div>

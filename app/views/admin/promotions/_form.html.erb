@@ -1,0 +1,11 @@
+<%= form_with model: [:admin, promotion], class: "mt-6 space-y-4" do |form| %>
+  <div>
+    <%= form.label :code, "Code", class: "block text-sm font-medium" %>
+    <%= form.text_field :code, required: true, class: "mt-2 rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+  </div>
+  <div>
+    <%= form.label :value, "Value", class: "block text-sm font-medium" %>
+    <%= form.number_field :value, step: "0.01", required: true, class: "mt-2 rounded-lg border border-stone-300 px-3 py-2 text-sm" %>
+  </div>
+  <%= form.submit promotion.new_record? ? "Create promotion" : "Save promotion", class: "rounded-lg bg-stone-950 px-3 py-2 text-sm text-white" %>
+<% end %>

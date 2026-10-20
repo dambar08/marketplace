@@ -13,6 +13,19 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "dashboard#show"
+    resources :customers, only: %i[index show update]
+    resources :orders, only: %i[index show]
+    resources :fulfillments, only: %i[index show update]
+    resources :payments, only: %i[index show]
+    resources :promotions
+    resources :carts, only: %i[index show update]
+    resources :products, only: %i[index new create show edit update] do
+      resource :thumbnail, only: :destroy, module: :products
+      resources :options, only: %i[create update destroy], module: :products
+      resources :variants, only: %i[create update destroy], module: :products do
+        resources :prices, only: %i[create update destroy]
+      end
+    end
   end
 
   root to: redirect("/admin")

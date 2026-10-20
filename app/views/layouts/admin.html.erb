@@ -18,9 +18,14 @@
         </div>
 
         <nav class="flex-1 px-3 py-4" aria-label="Admin">
-          <%= link_to admin_root_path, class: "block rounded-lg bg-white/10 px-3 py-2 text-sm font-medium text-white" do %>
-            Dashboard
-          <% end %>
+          <%= link_to "Dashboard", admin_root_path, class: "block rounded-lg px-3 py-2 text-sm font-medium text-white hover:bg-white/10" %>
+          <%= link_to "Products", admin_products_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
+          <%= link_to "Customers", admin_customers_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
+          <%= link_to "Orders", admin_orders_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
+          <%= link_to "Fulfillments", admin_fulfillments_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
+          <%= link_to "Payments", admin_payments_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
+          <%= link_to "Promotions", admin_promotions_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
+          <%= link_to "Carts", admin_carts_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
         </nav>
 
         <div class="border-t border-white/10 px-4 py-4">
