@@ -33,3 +33,17 @@ Rails 8.1 app. Ruby is `3.4.7` (`.ruby-version`; keep the Dockerfile `RUBY_VERSI
 - `Cart` `has_many :line_items` (`LineItem`). `cart_line_items` / `CartLineItem` is a separate empty model. Do not treat them as one association.
 - Pundit is installed. `ApplicationPolicy` denies by default and is not included in `ApplicationController`.
 - Schema source is `db/schema.rb`. Change migrations, then let Rails dump the schema. Deploy with Kamal (`bin/kamal`, `config/deploy.yml`); the production image is the root `Dockerfile`, not Compose.
+
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues on dambar08/marketplace. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default roles: needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: root `GLOSSARY.md` and `docs/adr/`. See `docs/agents/domain.md`.
