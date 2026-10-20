@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Admin" %> · Marketplace</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+
+  <body class="min-h-screen bg-stone-100 text-stone-900 antialiased">
+    <div class="md:grid md:min-h-screen md:grid-cols-[16rem_minmax(0,1fr)]">
+      <aside class="flex flex-col bg-stone-950 text-stone-100 md:sticky md:top-0 md:h-screen">
+        <div class="border-b border-white/10 px-5 py-6">
+          <p class="text-xs font-medium uppercase tracking-[0.2em] text-stone-400">Marketplace</p>
+          <p class="mt-1 text-lg font-semibold">Admin</p>
+        </div>
+
+        <nav class="flex-1 px-3 py-4" aria-label="Admin">
+          <%= link_to admin_root_path, class: "block rounded-lg bg-white/10 px-3 py-2 text-sm font-medium text-white" do %>
+            Dashboard
+          <% end %>
+        </nav>
+
+        <div class="border-t border-white/10 px-4 py-4">
+          <% if Current.user %>
+            <p class="truncate text-sm text-stone-300"><%= Current.user.email_address %></p>
+            <%= button_to "Sign out", session_path, method: :delete, class: "mt-3 w-full rounded-lg px-3 py-2 text-left text-sm text-stone-300 hover:bg-white/10 hover:text-white", form_class: "block" %>
+          <% end %>
+        </div>
+      </aside>
+
+      <div class="min-w-0">
+        <% if flash[:alert] %>
+          <p class="border-b border-red-200 bg-red-50 px-6 py-3 text-sm text-red-800"><%= flash[:alert] %></p>
+        <% end %>
+        <% if flash[:notice] %>
+          <p class="border-b border-emerald-200 bg-emerald-50 px-6 py-3 text-sm text-emerald-800"><%= flash[:notice] %></p>
+        <% end %>
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<div class="grid min-h-[calc(100vh-4.5rem)] lg:grid-cols-2">
+  <aside class="hidden flex-col justify-between bg-stone-950 px-10 py-12 text-stone-100 lg:flex">
+    <div>
+      <p class="text-xs font-medium uppercase tracking-[0.2em] text-stone-400">Marketplace</p>
+      <p class="mt-8 max-w-sm text-4xl font-semibold tracking-tight">The back office for the catalog.</p>
+      <p class="mt-4 max-w-sm text-sm leading-6 text-stone-400">Sign in to manage products, customers, and payments.</p>
+    </div>
+    <p class="text-sm text-stone-500">Staff accounts only.</p>
+  </aside>
+
+  <section class="flex items-center justify-center px-6 py-12">
+    <div class="w-full max-w-sm">
+      <p class="text-xs font-medium uppercase tracking-[0.2em] text-stone-500 lg:hidden">Marketplace</p>
+      <h1 class="mt-2 text-2xl font-semibold tracking-tight text-stone-950 lg:mt-0"><%= heading %></h1>
+      <% if local_assigns[:lede].present? %>
+        <p class="mt-2 text-sm leading-6 text-stone-500"><%= lede %></p>
+      <% end %>
+      <div class="mt-8">
+        <%= yield %>
+      </div>
+    </div>
+  </section>
+</div>

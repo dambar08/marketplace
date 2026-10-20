@@ -9,6 +9,10 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <% turbo_refreshes_with method: :morph, scroll: :preserve %>
+    <% if Rails.env.development? %>
+      <meta name="stimulus-debug" content="true">
+    <% end %>
 
     <%= yield :head %>
 
@@ -24,7 +28,11 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+  <body class="min-h-screen bg-stone-100 text-stone-900 antialiased">
+    <div id="flash" aria-live="polite">
+      <%= render "shared/flash" %>
+    </div>
     <%= yield %>
+    <%= render "shared/turbo_confirm" %>
   </body>
 </html>

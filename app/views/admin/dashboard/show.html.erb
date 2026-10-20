@@ -1,0 +1,134 @@
+<% content_for :title, "Dashboard" %>
+
+<div class="mx-auto max-w-6xl px-6 py-8">
+  <header class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-semibold tracking-tight">Dashboard</h1>
+      <p class="mt-1 text-sm text-stone-500">Catalog, customers, and payments at a glance.</p>
+    </div>
+    <p class="text-sm text-stone-500"><%= l(Time.current, format: :long) %></p>
+  </header>
+
+  <section class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4" aria-label="Totals">
+    <%= render "admin/dashboard/stat", label: "Products", value: number_with_delimiter(@dashboard.product_count), hint: products_without_variants_hint %>
+    <%= render "admin/dashboard/stat", label: "Variants", value: number_with_delimiter(@dashboard.variant_count) %>
+    <%= render "admin/dashboard/stat", label: "Orders", value: number_with_delimiter(@dashboard.order_count) %>
+    <%= render "admin/dashboard/stat", label: "Customers", value: number_with_delimiter(@dashboard.user_count) %>
+    <%= render "admin/dashboard/stat", label: "Carts", value: number_with_delimiter(@dashboard.cart_count) %>
+    <%= render "admin/dashboard/stat", label: "Promotions", value: number_with_delimiter(@dashboard.promotion_count) %>
+    <%= render "admin/dashboard/stat", label: "Awaiting shipment", value: number_with_delimiter(@dashboard.awaiting_shipment_count) %>
+    <% if @dashboard.captured_by_currency.blank? %>
+      <%= render "admin/dashboard/stat", label: "Captured", value: "—" %>
+    <% else %>
+      <% @dashboard.captured_by_currency.each do |currency, amount| %>
+        <%= render "admin/dashboard/stat", label: "Captured", value: format_money(amount, currency) %>
+      <% end %>
+    <% end %>
+  </section>
+
+  <div class="mt-8 grid gap-6 lg:grid-cols-2">
+    <section class="rounded-xl border border-stone-200 bg-white">
+      <div class="border-b border-stone-200 px-5 py-4">
+        <h2 class="font-medium">Recent products</h2>
+      </div>
+      <% if @dashboard.recent_products.any? %>
+        <ul class="divide-y divide-stone-100">
+          <% @dashboard.recent_products.each do |product| %>
+            <li class="flex items-center justify-between gap-4 px-5 py-3">
+              <div class="min-w-0">
+                <p class="truncate font-medium"><%= product.title %></p>
+                <p class="text-sm text-stone-500"><%= pluralize(product.variants.size, "variant") %></p>
+              </div>
+              <p class="shrink-0 text-sm text-stone-400"><%= time_ago_in_words(product.created_at) %> ago</p>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="px-5 py-8 text-sm text-stone-500">No products yet.</p>
+      <% end %>
+    </section>
+
+    <section class="rounded-xl border border-stone-200 bg-white">
+      <div class="border-b border-stone-200 px-5 py-4">
+        <h2 class="font-medium">Payments</h2>
+      </div>
+      <% if @dashboard.payment_status_counts.any? %>
+        <ul class="divide-y divide-stone-100">
+          <% @dashboard.payment_status_counts.each do |status, count| %>
+            <li class="flex items-center justify-between px-5 py-3">
+              <p class="font-medium capitalize"><%= status.to_s.humanize %></p>
+              <p class="text-sm text-stone-500"><%= pluralize(count, "collection") %></p>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="px-5 py-8 text-sm text-stone-500">No payment collections yet.</p>
+      <% end %>
+      <% if @dashboard.recent_payments.any? %>
+        <div class="border-t border-stone-200">
+          <ul class="divide-y divide-stone-100">
+            <% @dashboard.recent_payments.each do |payment| %>
+              <li class="flex items-center justify-between gap-4 px-5 py-3 text-sm">
+                <p class="font-medium"><%= format_money(payment.amount, payment.currency_code) %></p>
+                <p class="text-stone-500"><%= payment.status.to_s.humanize %></p>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </section>
+  </div>
+
+  <div class="mt-6 grid gap-6 lg:grid-cols-2">
+    <section class="rounded-xl border border-stone-200 bg-white">
+      <div class="border-b border-stone-200 px-5 py-4">
+        <h2 class="font-medium">Low stock</h2>
+      </div>
+      <% if @dashboard.low_stock_variants.any? %>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-stone-500">
+              <tr>
+                <th class="px-5 py-2 font-medium">Variant</th>
+                <th class="px-5 py-2 font-medium">Product</th>
+                <th class="px-5 py-2 text-right font-medium">Qty</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-stone-100">
+              <% @dashboard.low_stock_variants.each do |variant| %>
+                <tr>
+                  <td class="px-5 py-3 font-medium"><%= variant.title %></td>
+                  <td class="px-5 py-3 text-stone-500"><%= variant.product.title %></td>
+                  <td class="px-5 py-3 text-right <%= variant.inventory_quantity.to_i.zero? ? "text-red-700" : "text-amber-700" %>"><%= variant.inventory_quantity %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <p class="px-5 py-8 text-sm text-stone-500">No variants at or below <%= Admin::Dashboard::LOW_STOCK_THRESHOLD %> in stock.</p>
+      <% end %>
+    </section>
+
+    <section class="rounded-xl border border-stone-200 bg-white">
+      <div class="border-b border-stone-200 px-5 py-4">
+        <h2 class="font-medium">Recent customers</h2>
+      </div>
+      <% if @dashboard.recent_users.any? %>
+        <ul class="divide-y divide-stone-100">
+          <% @dashboard.recent_users.each do |user| %>
+            <li class="flex items-center justify-between gap-4 px-5 py-3">
+              <div class="min-w-0">
+                <p class="truncate font-medium"><%= user.email_address %></p>
+                <p class="text-sm text-stone-500"><%= user.admin? ? "Admin" : "Customer" %></p>
+              </div>
+              <p class="shrink-0 text-sm text-stone-400"><%= time_ago_in_words(user.created_at) %> ago</p>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="px-5 py-8 text-sm text-stone-500">No customers yet.</p>
+      <% end %>
+    </section>
+  </div>
+</div>
