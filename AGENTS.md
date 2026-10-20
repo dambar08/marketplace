@@ -8,8 +8,8 @@ Rails 8.1 app. Ruby is `3.4.7` (`.ruby-version`; keep the Dockerfile `RUBY_VERSI
 - App processes: `bin/dev` (Foreman, `Procfile.dev`: Rails on `PORT` default 3000, `yarn build --watch`, `yarn build:css --watch`, Sidekiq). It passes `--env /dev/null`, so Foreman does not load `.env`. `dotenv-rails` still loads `.env` inside Rails.
 - Lint: `bin/rubocop` (rubocop-rails-omakase only).
 - Security, same as CI: `bin/brakeman --no-pager`, `bin/bundler-audit`.
-- Tests CI actually runs are Minitest, not RSpec: `bin/rails db:test:prepare test` and `bin/rails test:system`. One file: `bin/rails test test/models/foo_test.rb`.
-- `spec/` is RSpec scaffolds (mostly `pending`) plus empty FactoryBot factories. GitHub Actions and `bin/ci` (`config/ci.rb`) never run `rspec`. `.rspec` does not require `rails_helper`, and `infer_spec_type_from_file_location!` is off. FactoryBot syntax methods are not included in `rails_helper`.
+- New tests are RSpec. Generators use `:rspec` and FactoryBot. `.rspec` requires `rails_helper`, spec type is inferred from the file path, and FactoryBot syntax methods load from `spec/support`. One file: `bundle exec rspec spec/models/foo_spec.rb`.
+- CI still runs Minitest until that suite is retired: `bin/rails db:test:prepare test` and `bin/rails test:system`. GitHub Actions and `bin/ci` (`config/ci.rb`) do not run `rspec` yet.
 
 ## Environment
 

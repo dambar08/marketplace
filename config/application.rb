@@ -16,6 +16,11 @@ module Marketplace
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    config.generators do |generate|
+      generate.test_framework :rspec
+      generate.fixture_replacement :factory_bot, dir: "spec/factories"
+    end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

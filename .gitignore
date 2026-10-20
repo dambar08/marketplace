@@ -40,5 +40,7 @@
 
 /node_modules
 
+/spec/examples.txt
+
 # Local Helm overrides (may contain RAILS_MASTER_KEY)
 /helm/**/secrets.yaml
