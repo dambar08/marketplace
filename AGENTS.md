@@ -9,7 +9,7 @@ Rails 8.1 app. Ruby is `3.4.7` (`.ruby-version`; keep the Dockerfile `RUBY_VERSI
 - Lint: `bin/rubocop` (rubocop-rails-omakase only).
 - Security, same as CI: `bin/brakeman --no-pager`, `bin/bundler-audit`.
 - New tests are RSpec. Generators use `:rspec` and FactoryBot. `.rspec` requires `rails_helper`, spec type is inferred from the file path, and FactoryBot syntax methods load from `spec/support`. One file: `bundle exec rspec spec/models/foo_spec.rb`.
-- CI still runs Minitest until that suite is retired: `bin/rails db:test:prepare test` and `bin/rails test:system`. GitHub Actions and `bin/ci` (`config/ci.rb`) do not run `rspec` yet.
+- CI runs RSpec: `bin/rails db:test:prepare && bundle exec rspec`. `config/ci.rb` runs `bundle exec rspec`. The `minitest` gem stays because Rails depends on it.
 
 ## Environment
 
