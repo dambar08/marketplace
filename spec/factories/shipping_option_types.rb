@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :shippping_option_type do
+  factory :shipping_option_type do
     
   end
 end
