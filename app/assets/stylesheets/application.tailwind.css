@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+.turbo-progress-bar {
+  height: 3px;
+  background-color: #1c1917;
+}
+
+turbo-frame[busy] {
+  opacity: 0.6;
+}

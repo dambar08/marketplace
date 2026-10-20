@@ -4,5 +4,29 @@
 
 import { application } from "./application"
 
+import AutoSubmitController from "./auto_submit_controller"
+application.register("auto-submit", AutoSubmitController)
+
+import ClipboardController from "./clipboard_controller"
+application.register("clipboard", ClipboardController)
+
+import DialogController from "./dialog_controller"
+application.register("dialog", DialogController)
+
+import DismissController from "./dismiss_controller"
+application.register("dismiss", DismissController)
+
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import ResetFormController from "./reset_form_controller"
+application.register("reset-form", ResetFormController)
+
+import RevealController from "./reveal_controller"
+application.register("reveal", RevealController)
+
+import ToggleController from "./toggle_controller"
+application.register("toggle", ToggleController)
