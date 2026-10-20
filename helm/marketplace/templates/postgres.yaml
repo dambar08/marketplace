@@ -1,0 +1,93 @@
+{{- if .Values.database.bundled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "marketplace.postgres.fullname" . }}
+  labels:
+    {{- include "marketplace.labels" . | nindent 4 }}
+    app.kubernetes.io/component: postgres
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "marketplace.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: postgres
+  ports:
+    - name: postgres
+      port: {{ .Values.database.port }}
+      targetPort: postgres
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "marketplace.postgres.fullname" . }}
+  labels:
+    {{- include "marketplace.labels" . | nindent 4 }}
+    app.kubernetes.io/component: postgres
+spec:
+  serviceName: {{ include "marketplace.postgres.fullname" . }}
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "marketplace.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: postgres
+  template:
+    metadata:
+      labels:
+        {{- include "marketplace.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: postgres
+    spec:
+      {{- include "marketplace.imagePullSecrets" . | nindent 6 }}
+      securityContext:
+        fsGroup: 999
+      containers:
+        - name: postgres
+          image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}"
+          imagePullPolicy: {{ .Values.database.image.pullPolicy }}
+          ports:
+            - name: postgres
+              containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: {{ .Values.database.username | quote }}
+            - name: POSTGRES_DB
+              value: {{ .Values.database.name | quote }}
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "marketplace.secretName" . }}
+                  key: MARKETPLACE_DATABASE_PASSWORD
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          {{- with .Values.database.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", {{ .Values.database.username | quote }}, "-d", {{ .Values.database.name | quote }}]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+          livenessProbe:
+            exec:
+              command: ["pg_isready", "-U", {{ .Values.database.username | quote }}]
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 3
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+      {{- include "marketplace.scheduling" . | nindent 6 }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        labels:
+          {{- include "marketplace.labels" . | nindent 10 }}
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.database.persistence.size }}
+        {{- include "marketplace.storageClass" (dict "storageClass" .Values.database.persistence.storageClass) | nindent 8 }}
+{{- end }}

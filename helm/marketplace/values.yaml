@@ -1,0 +1,143 @@
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: marketplace
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+# Production decrypts config/credentials.yml.enc. Set one of:
+#   helm upgrade --install marketplace ./helm/marketplace --set rails.masterKey=$RAILS_MASTER_KEY
+# or rails.existingSecret (keys: RAILS_MASTER_KEY, DATABASE_URL, REDIS_URL, MARKETPLACE_DATABASE_PASSWORD).
+rails:
+  masterKey: ""
+  secretKeyBase: ""
+  existingSecret: ""
+  logLevel: info
+  maxThreads: 3
+  webConcurrency: 1
+  sidekiqConcurrency: 10
+
+web:
+  replicaCount: 1
+  terminationGracePeriodSeconds: 30
+  resources: {}
+
+sidekiq:
+  enabled: true
+  # Share the web pod volume. Required while Active Storage is local disk and the
+  # claim is ReadWriteOnce (two pods cannot mount it).
+  asSidecar: true
+  replicaCount: 1
+  terminationGracePeriodSeconds: 60
+  resources: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: marketplace.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+database:
+  # In-cluster Postgres. Set false and database.host to use an external server.
+  bundled: true
+  host: ""
+  port: 5432
+  name: marketplace_production
+  username: marketplace
+  # Leave empty to generate a password and keep it across upgrades.
+  password: ""
+  # Optional full URL. When empty, the chart builds postgres://user:pass@host:port/db.
+  url: ""
+  sslmode: ""
+  image:
+    repository: postgres
+    tag: "16"
+    pullPolicy: IfNotPresent
+  persistence:
+    size: 8Gi
+    storageClass: ""
+  resources: {}
+
+redis:
+  # In-cluster Valkey. Set false and redis.url for an external instance.
+  bundled: true
+  host: ""
+  port: 6379
+  url: ""
+  image:
+    repository: valkey/valkey
+    tag: "8"
+    pullPolicy: IfNotPresent
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+  resources: {}
+
+# Active Storage local disk (/rails/storage). ReadWriteOnce allows one web pod.
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: ""
+  accessMode: ReadWriteOnce
+
+serviceAccount:
+  create: true
+  automount: false
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  seccompProfile:
+    type: RuntimeDefault
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1
+
+probes:
+  path: /up
+  startup:
+    failureThreshold: 30
+    periodSeconds: 5
+  liveness:
+    periodSeconds: 10
+    timeoutSeconds: 3
+    failureThreshold: 3
+  readiness:
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3

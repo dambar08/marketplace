@@ -1,0 +1,15 @@
+{{- if .Values.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "marketplace.fullname" . }}-storage
+  labels:
+    {{- include "marketplace.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size }}
+  {{- include "marketplace.storageClass" (dict "storageClass" .Values.persistence.storageClass) | nindent 2 }}
+{{- end }}

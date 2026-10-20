@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "marketplace.fullname" . }}-test
+  labels:
+    {{- include "marketplace.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: test
+spec:
+  restartPolicy: Never
+  containers:
+    - name: wget
+      image: busybox:1.36
+      command: ["wget", "-qO-", {{ printf "http://%s:%v/up" (include "marketplace.fullname" .) .Values.service.port | quote }}]

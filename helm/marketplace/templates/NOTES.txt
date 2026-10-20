@@ -1,0 +1,22 @@
+Marketplace is installing in {{ .Release.Namespace }}.
+
+Web service: {{ include "marketplace.fullname" . }}:{{ .Values.service.port }}
+Health: http://{{ include "marketplace.fullname" . }}:{{ .Values.service.port }}{{ .Values.probes.path }}
+
+Image: {{ include "marketplace.image" . }}
+{{- if not .Values.rails.existingSecret }}
+
+Database password is in secret {{ include "marketplace.secretName" . }} key MARKETPLACE_DATABASE_PASSWORD.
+{{- end }}
+{{- if .Values.ingress.enabled }}
+{{- range .Values.ingress.hosts }}
+
+Ingress host: {{ .host }}
+{{- end }}
+{{- else }}
+
+Ingress is off. Enable it with --set ingress.enabled=true --set ingress.hosts[0].host=app.example.com
+{{- end }}
+
+Active Storage uses local disk. ReadWriteOnce allows one web pod; Sidekiq runs in that pod.
+Point production Active Storage at S3 before raising web.replicaCount.

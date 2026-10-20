@@ -1,0 +1,43 @@
+{{- if and .Values.sidekiq.enabled (not .Values.sidekiq.asSidecar) }}
+{{- include "marketplace.validate" . }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "marketplace.fullname" . }}-sidekiq
+  labels:
+    {{- include "marketplace.labels" . | nindent 4 }}
+    app.kubernetes.io/component: sidekiq
+spec:
+  replicas: {{ .Values.sidekiq.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "marketplace.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: sidekiq
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        {{- include "marketplace.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: sidekiq
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: {{ include "marketplace.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.serviceAccount.automount }}
+      {{- include "marketplace.imagePullSecrets" . | nindent 6 }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      terminationGracePeriodSeconds: {{ .Values.sidekiq.terminationGracePeriodSeconds }}
+      initContainers:
+        {{- include "marketplace.initContainers" . | nindent 8 }}
+      containers:
+        {{- include "marketplace.sidekiqContainer" . | nindent 8 }}
+      {{- include "marketplace.scheduling" . | nindent 6 }}
+      volumes:
+        {{- include "marketplace.podVolumes" . | nindent 8 }}
+{{- end }}

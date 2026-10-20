@@ -1,0 +1,102 @@
+{{- if .Values.redis.bundled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "marketplace.redis.fullname" . }}
+  labels:
+    {{- include "marketplace.labels" . | nindent 4 }}
+    app.kubernetes.io/component: redis
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "marketplace.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: redis
+  ports:
+    - name: redis
+      port: {{ .Values.redis.port }}
+      targetPort: redis
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "marketplace.redis.fullname" . }}
+  labels:
+    {{- include "marketplace.labels" . | nindent 4 }}
+    app.kubernetes.io/component: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "marketplace.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: redis
+  strategy:
+    type: {{ if .Values.redis.persistence.enabled }}Recreate{{ else }}RollingUpdate{{ end }}
+  template:
+    metadata:
+      labels:
+        {{- include "marketplace.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: redis
+    spec:
+      {{- include "marketplace.imagePullSecrets" . | nindent 6 }}
+      securityContext:
+        fsGroup: 999
+      containers:
+        - name: redis
+          image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
+          imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
+          args:
+            - --protected-mode
+            - "no"
+            - --dir
+            - /data
+            {{- if .Values.redis.persistence.enabled }}
+            - --appendonly
+            - "yes"
+            {{- end }}
+          ports:
+            - name: redis
+              containerPort: 6379
+          {{- with .Values.redis.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          readinessProbe:
+            exec:
+              command: ["valkey-cli", "ping"]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command: ["valkey-cli", "ping"]
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      {{- include "marketplace.scheduling" . | nindent 6 }}
+      volumes:
+        - name: data
+          {{- if .Values.redis.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "marketplace.redis.fullname" . }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+{{- if .Values.redis.persistence.enabled }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "marketplace.redis.fullname" . }}
+  labels:
+    {{- include "marketplace.labels" . | nindent 4 }}
+    app.kubernetes.io/component: redis
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.redis.persistence.size }}
+  {{- include "marketplace.storageClass" (dict "storageClass" .Values.redis.persistence.storageClass) | nindent 2 }}
+{{- end }}
+{{- end }}
