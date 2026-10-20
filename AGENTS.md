@@ -16,6 +16,7 @@ Rails 8.1 app. Ruby is `3.4.7` (`.ruby-version`; keep the Dockerfile `RUBY_VERSI
 - This workspace uses `.devcontainer/compose.yaml` (service `rails-app`, plus `postgres`, Valkey as `redis`, `selenium`). It is not the root `docker-compose.yml`.
 - Root `docker-compose.yml` is a separate stack (Memcached, Valkey, Postgres) and uses the same Compose project name, `marketplace`.
 - Devcontainer env: `DB_HOST=postgres`, `REDIS_URL=redis://redis:6379/1`, `SELENIUM_HOST=selenium`, `CAPYBARA_SERVER_PORT=45678`. No `MEMCACHED_URL`.
+- `CORS_ORIGIN` is one full browser origin. Blank or unset allows none. It is not a host allowlist and does not share the session cookie.
 - `config/database.yml` sets host, user, and password only when `DB_HOST` is set (`postgres` / `postgres`). Otherwise Rails uses a local socket and the OS user. Databases: `marketplace_development`, `marketplace_test`. The Postgres image does not create those; `bin/rails db:prepare` does.
 - Development cache store defaults to `memcached:11211`. That hostname exists only on the root Compose network. Caching stays off unless `tmp/caching-dev.txt` exists.
 - Sidekiq is started by `bin/dev` and reads `REDIS_URL` (code default `redis://localhost:6379/0`). `config.active_job.queue_adapter` is never set to `:sidekiq`, so Active Job does not reach that process. Development Action Cable is `async`. Production Cable uses `REDIS_URL`, or `redis://localhost:6379/1` if unset.
