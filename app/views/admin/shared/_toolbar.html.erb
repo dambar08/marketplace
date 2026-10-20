@@ -1,0 +1,14 @@
+<div class="mt-6 flex flex-wrap items-end justify-between gap-3">
+  <%= form_with url: url, method: :get, class: "flex min-w-0 flex-1 gap-2" do |form| %>
+    <%= form.label :q, "Search", class: "sr-only" %>
+    <%= form.search_field :q, value: params[:q], placeholder: "Search", class: "w-full max-w-sm rounded-xl border border-stone-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none focus:border-stone-950 focus:ring-4 focus:ring-stone-950/10" %>
+    <%= form.submit "Search", class: "rounded-xl bg-stone-950 px-4 py-2.5 text-sm font-medium text-white" %>
+  <% end %>
+  <% if local_assigns[:filters].present? %>
+    <nav class="flex flex-wrap gap-2" aria-label="Filters">
+      <% filters.each do |label, path| %>
+        <%= link_to label, path, class: "rounded-full border border-stone-200 bg-white px-3 py-1.5 text-sm text-stone-700 hover:border-stone-950" %>
+      <% end %>
+    </nav>
+  <% end %>
+</div>

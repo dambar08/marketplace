@@ -2,6 +2,8 @@ module Admin
   class CustomersController < BaseController
     def index
       @customers = User.order(:email_address)
+      @customers = @customers.where("email_address ILIKE ?", "%#{params[:q]}%") if params[:q].present?
+      @customers = @customers.where(admin: true) if params[:filter] == "admins"
     end
 
     def show

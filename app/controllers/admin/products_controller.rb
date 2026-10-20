@@ -2,6 +2,9 @@ module Admin
   class ProductsController < BaseController
     def index
       @products = Product.order(:title)
+      @products = @products.where("title ILIKE ?", "%#{params[:q]}%") if params[:q].present?
+      @products = @products.where.missing(:variants) if params[:filter] == "without_variants"
+      @low_stock_variants = ProductVariant.includes(:product).where(inventory_quantity: ..Admin::Dashboard::LOW_STOCK_THRESHOLD).order(:inventory_quantity) if params[:filter] == "low_stock"
     end
 
     def new

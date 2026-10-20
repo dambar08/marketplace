@@ -9,23 +9,28 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class="min-h-screen bg-stone-100 text-stone-900 antialiased">
-    <div class="md:grid md:min-h-screen md:grid-cols-[16rem_minmax(0,1fr)]">
+  <body class="min-h-screen bg-stone-50 text-stone-900 antialiased">
+    <div class="md:grid md:min-h-screen md:grid-cols-[15rem_minmax(0,1fr)]">
       <aside class="flex flex-col bg-stone-950 text-stone-100 md:sticky md:top-0 md:h-screen">
         <div class="border-b border-white/10 px-5 py-6">
           <p class="text-xs font-medium uppercase tracking-[0.2em] text-stone-400">Marketplace</p>
-          <p class="mt-1 text-lg font-semibold">Admin</p>
+          <p class="mt-1 text-lg font-semibold tracking-tight">Admin</p>
         </div>
 
-        <nav class="flex-1 px-3 py-4" aria-label="Admin">
-          <%= link_to "Dashboard", admin_root_path, class: "block rounded-lg px-3 py-2 text-sm font-medium text-white hover:bg-white/10" %>
-          <%= link_to "Products", admin_products_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
-          <%= link_to "Customers", admin_customers_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
-          <%= link_to "Orders", admin_orders_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
-          <%= link_to "Fulfillments", admin_fulfillments_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
-          <%= link_to "Payments", admin_payments_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
-          <%= link_to "Promotions", admin_promotions_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
-          <%= link_to "Carts", admin_carts_path, class: "mt-1 block rounded-lg px-3 py-2 text-sm font-medium text-stone-300 hover:bg-white/10 hover:text-white" %>
+        <nav class="flex-1 space-y-1 px-3 py-4" aria-label="Admin">
+          <% [
+            [ "Dashboard", admin_root_path ],
+            [ "Products", admin_products_path ],
+            [ "Customers", admin_customers_path ],
+            [ "Orders", admin_orders_path ],
+            [ "Fulfillments", admin_fulfillments_path ],
+            [ "Payments", admin_payments_path ],
+            [ "Promotions", admin_promotions_path ],
+            [ "Carts", admin_carts_path ]
+          ].each do |label, path| %>
+            <% current = path == admin_root_path ? request.path == admin_root_path : request.path.start_with?(path) %>
+            <%= link_to label, path, class: [ "block rounded-xl px-3 py-2 text-sm font-medium", (current ? "bg-white text-stone-950" : "text-stone-300 hover:bg-white/10 hover:text-white") ] %>
+          <% end %>
         </nav>
 
         <div class="border-t border-white/10 px-4 py-4">

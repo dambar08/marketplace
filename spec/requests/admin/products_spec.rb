@@ -264,6 +264,18 @@ RSpec.describe "Admin products" do
     expect(response.body).not_to include("LINEN-BLU")
   end
 
+  it "searches products by title" do
+    create(:user, email_address: "admin@example.com", admin: true)
+    sign_in_as("admin@example.com")
+    Product.create!(title: "Linen shirt")
+    Product.create!(title: "Wool coat")
+
+    get admin_products_path(q: "Linen")
+
+    expect(response.body).to include("Linen shirt")
+    expect(response.body).not_to include("Wool coat")
+  end
+
   it "lists products that have no variants" do
     create(:user, email_address: "admin@example.com", admin: true)
     sign_in_as("admin@example.com")

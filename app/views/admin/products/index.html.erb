@@ -3,9 +3,23 @@
 <div class="mx-auto max-w-5xl px-6 py-8">
   <div class="flex items-end justify-between">
     <h1 class="text-2xl font-semibold tracking-tight">Products</h1>
-    <%= link_to "New product", new_admin_product_path, class: "text-sm underline" %>
+    <%= link_to "New product", new_admin_product_path, class: "rounded-xl bg-stone-950 px-4 py-2.5 text-sm font-medium text-white" %>
   </div>
-  <ul class="mt-6 divide-y divide-stone-200 rounded-xl border border-stone-200 bg-white">
+  <%= render "admin/shared/toolbar", url: admin_products_path, filters: [
+    [ "No variants", admin_products_path(filter: "without_variants") ],
+    [ "Low stock", admin_products_path(filter: "low_stock") ]
+  ] %>
+  <% if @low_stock_variants %>
+    <ul class="mt-6 divide-y divide-stone-200 rounded-2xl border border-stone-200 bg-white shadow-sm">
+      <% @low_stock_variants.each do |variant| %>
+        <li class="px-5 py-3">
+          <%= link_to variant.title, admin_product_path(variant.product, anchor: "variant-#{variant.id}"), class: "font-medium" %>
+          <p class="text-sm text-stone-500">Stock <%= variant.inventory_quantity %></p>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+  <ul class="mt-6 divide-y divide-stone-200 rounded-2xl border border-stone-200 bg-white shadow-sm">
     <% @products.each do |product| %>
       <li class="px-5 py-3">
         <%= link_to product.title, admin_product_path(product), class: "font-medium" %>
@@ -15,4 +29,5 @@
       </li>
     <% end %>
   </ul>
+  <% end %>
 </div>

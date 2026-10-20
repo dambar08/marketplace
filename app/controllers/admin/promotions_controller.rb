@@ -2,6 +2,7 @@ module Admin
   class PromotionsController < BaseController
     def index
       @promotions = Promotion.order(:code)
+      @promotions = @promotions.where("code ILIKE ?", "%#{params[:q]}%") if params[:q].present?
     end
 
     def new

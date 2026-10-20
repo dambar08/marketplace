@@ -1,7 +1,13 @@
 module Admin
   class FulfillmentsController < BaseController
     def index
-      @fulfillments = Fulfillment.awaiting.order(:id)
+      scope = params[:q].present? ? Fulfillment.order(:id) : Fulfillment.awaiting.order(:id)
+      @fulfillments = if params[:q].present?
+        needle = params[:q].downcase
+        scope.select { |fulfillment| fulfillment.status_label.downcase.include?(needle) }
+      else
+        scope
+      end
     end
 
     def show

@@ -53,6 +53,25 @@ RSpec.describe "Admin dashboard" do
     expect(response.body).to include(%(href="#{admin_product_path(unfinished)}"))
   end
 
+  it "draws inspectable bars for totals, captured money, and payment status" do
+    create(:user, email_address: "admin@example.com", admin: true)
+    Product.create!(title: "Linen shirt")
+    PaymentCollection.create!(amount: 40, captured_amount: 40, currency_code: "USD", status: "captured")
+    PaymentCollection.create!(amount: 10, captured_amount: 0, currency_code: "EUR", status: "pending")
+    sign_in_as("admin@example.com")
+
+    get admin_root_path
+
+    expect(response.body).to include('data-chart="totals"')
+    expect(response.body).to include('data-label="Products" data-value="1"')
+    expect(response.body).to include('data-chart="captured"')
+    expect(response.body).to include('data-label="USD" data-value="40.00"')
+    expect(response.body).to include('data-chart="payment-status"')
+    expect(response.body).to include('data-label="Captured" data-value="1"')
+    expect(response.body).to include('class="chart-bar ')
+    expect(response.body).to include('style="width: 100%"')
+  end
+
   it "sends the root path to the admin dashboard" do
     get root_path
 

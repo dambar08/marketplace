@@ -25,6 +25,32 @@
       <% end %>
     <% end %>
   </section>
+  <div class="mt-8 grid gap-6 lg:grid-cols-3">
+    <%= render "admin/dashboard/chart",
+          name: "totals",
+          heading: "Totals",
+          bars: [
+            { label: "Products", value: @dashboard.product_count, display: @dashboard.product_count },
+            { label: "Variants", value: @dashboard.variant_count, display: @dashboard.variant_count },
+            { label: "Orders", value: @dashboard.order_count, display: @dashboard.order_count },
+            { label: "Customers", value: @dashboard.user_count, display: @dashboard.user_count },
+            { label: "Carts", value: @dashboard.cart_count, display: @dashboard.cart_count },
+            { label: "Promotions", value: @dashboard.promotion_count, display: @dashboard.promotion_count },
+            { label: "Awaiting shipment", value: @dashboard.awaiting_shipment_count, display: @dashboard.awaiting_shipment_count }
+          ] %>
+    <%= render "admin/dashboard/chart",
+          name: "captured",
+          heading: "Captured",
+          bars: @dashboard.captured_by_currency.map { |currency, amount|
+            { label: currency, value: amount, display: number_with_precision(amount, precision: 2) }
+          } %>
+    <%= render "admin/dashboard/chart",
+          name: "payment-status",
+          heading: "Payments",
+          bars: @dashboard.payment_status_counts.map { |status, count|
+            { label: status.to_s.humanize, value: count, display: count }
+          } %>
+  </div>
   <ul class="mt-4 space-y-1">
     <% @dashboard.products_without_variants.each do |product| %>
       <li><%= link_to "#{product.title} has no variants", admin_product_path(product), class: "text-sm underline" %></li>
