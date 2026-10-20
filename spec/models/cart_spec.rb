@@ -69,4 +69,33 @@ RSpec.describe Cart do
     expect(other.line_items.map(&:title)).to eq([ "Mug" ])
     expect(other.subtotal).to eq(10)
   end
+
+  it "keeps a loaded line list in step with a quantity change" do
+    cart = create(:cart)
+    cart.add_line(title: "Mug", unit_price: 10, quantity: 1)
+    cart.line_items.load
+    line = cart.line_items.sole
+
+    cart.change_line_quantity(line, 4)
+
+    expect(line.quantity).to eq(4)
+    expect(line.total).to eq(40)
+    expect(cart.line_items.map(&:total)).to eq([ 40 ])
+    expect(cart.subtotal).to eq(40)
+    expect(cart.total).to eq(40)
+  end
+
+  it "drops a removed line from a loaded line list" do
+    cart = create(:cart)
+    cart.add_line(title: "Mug", unit_price: 10, quantity: 2)
+    cart.add_line(title: "Cup", unit_price: 15, quantity: 1)
+    cart.line_items.load
+    cup = cart.line_items.find { |line| line.title == "Cup" }
+
+    cart.remove_line(cup)
+
+    expect(cart.line_items.map(&:title)).to eq([ "Mug" ])
+    expect(cart.subtotal).to eq(20)
+    expect(cart.total).to eq(20)
+  end
 end
