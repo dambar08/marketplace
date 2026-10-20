@@ -25,6 +25,11 @@
       <% end %>
     <% end %>
   </section>
+  <ul class="mt-4 space-y-1">
+    <% @dashboard.products_without_variants.each do |product| %>
+      <li><%= link_to "#{product.title} has no variants", admin_product_path(product), class: "text-sm underline" %></li>
+    <% end %>
+  </ul>
 
   <div class="mt-8 grid gap-6 lg:grid-cols-2">
     <section class="rounded-xl border border-stone-200 bg-white">

@@ -111,6 +111,20 @@ RSpec.describe "Admin products" do
     expect(response.body).not_to include("Color")
   end
 
+  it "keeps a variant's chosen value when an option is renamed" do
+    create(:user, email_address: "admin@example.com", admin: true)
+    sign_in_as("admin@example.com")
+    product = Product.create!(title: "Linen shirt")
+    option = product.options.create!(title: "Color", values: [ "Blue", "Green" ])
+    product.variants.create!(title: "Sea", sku: "LINEN-SEA", options: { "Color" => "Green" })
+
+    patch admin_product_option_path(product, option), params: { product_option: { title: "Colour", values: "Blue, Green" } }
+    follow_redirect!
+
+    expect(response.body).to include("Colour: Green")
+    expect(response.body).not_to include("Color: Green")
+  end
+
   it "adds a variant with a title and SKU" do
     create(:user, email_address: "admin@example.com", admin: true)
     sign_in_as("admin@example.com")

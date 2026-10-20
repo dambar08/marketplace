@@ -45,6 +45,19 @@ RSpec.describe "Admin carts" do
     expect(response.body).to include("Total 20.00")
   end
 
+  it "takes the full promotion value off the cart total" do
+    create(:user, email_address: "admin@example.com", admin: true)
+    sign_in_as("admin@example.com")
+    cart = Cart.create!
+    cart.add_line(title: "Mug", unit_price: 10, quantity: 2)
+    promotion = Promotion.create!(code: "BIG", value: 25)
+
+    patch admin_cart_path(cart), params: { promotion_id: promotion.id }
+    follow_redirect!
+
+    expect(response.body).to include("Total -5.00")
+  end
+
   def sign_in_as(email)
     post session_path, params: { email_address: email, password: "password" }
   end

@@ -48,6 +48,9 @@ RSpec.describe "Admin dashboard" do
     expect(response.body).to include(%(href="#{admin_product_path(product)}#variant-#{variant.id}"))
     expect(response.body).to include("Dashboard")
     expect(response.body).to include("USD 10.00")
+    unfinished = Product.create!(title: "Unfinished listing")
+    get admin_root_path
+    expect(response.body).to include(%(href="#{admin_product_path(unfinished)}"))
   end
 
   it "sends the root path to the admin dashboard" do

@@ -46,7 +46,7 @@ class Cart < ApplicationRecord
     adjustment = promotion&.value || 0
     update!(
       subtotal: sum,
-      total: [ sum - adjustment, 0 ].max,
+      total: sum - adjustment,
       original_item_subtotal: sum,
       original_item_total: sum
     )

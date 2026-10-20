@@ -31,7 +31,11 @@ class Admin::Dashboard
   end
 
   def products_without_variants_count
-    Product.where.missing(:variants).count
+    products_without_variants.count
+  end
+
+  def products_without_variants
+    Product.where.missing(:variants).order(:title)
   end
 
   def captured_by_currency
