@@ -30,3 +30,123 @@ application.register("reveal", RevealController)
 
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
+
+import AnimatedNumberController from "@stimulus-components/animated-number"
+application.register("animated-number", AnimatedNumberController)
+
+// import AutoSubmitController from "@stimulus-components/auto-submit"
+// application.register("auto-submit", AutoSubmitController)
+
+import CarouselController from "@stimulus-components/carousel"
+application.register("carousel", CarouselController)
+
+import CharacterCounterController from "@stimulus-components/character-counter"
+application.register("character-counter", CharacterCounterController)
+
+import ChartjsController from "@stimulus-components/chartjs"
+application.register("chartjs", ChartjsController)
+
+import CheckboxSelectAllController from "@stimulus-components/checkbox-select-all"
+application.register("checkbox-select-all", CheckboxSelectAllController)
+
+// import ClipboardController from "@stimulus-components/clipboard"
+// application.register("clipboard", ClipboardController)
+
+application.register("color-picker", ColorPickerController)
+import ColorPickerController from "@stimulus-components/color-picker"
+
+application.register("confirmation", ConfirmationController)
+import ConfirmationController from "@stimulus-components/confirmation"
+
+application.register("content-loader", ContentLoaderController)
+import ContentLoaderController from "@stimulus-components/content-loader"
+
+application.register("dialog", DialogController)
+// import DialogController from "@stimulus-components/dialog"
+
+// import DropdownController from "@stimulus-components/dropdown"
+// application.register("dropdown", DropdownController)
+
+import GlowController from "@stimulus-components/glow"
+application.register("glow", GlowController)
+
+import HotkeyController from "@stimulus-components/hotkey"
+application.register("hotkey", HotkeyController)
+
+import LightboxController from "@stimulus-components/lightbox"
+application.register("lightbox", LightboxController)
+
+import NotificationController from "@stimulus-components/notification"
+application.register("notification", NotificationController)
+
+import PasswordVisibilityController from "@stimulus-components/password-visibility"
+application.register("password-visibility", PasswordVisibilityController)
+
+import PlacesAutocompleteController from "stimulus-places-autocomplete"
+application.register("places-autocomplete", PlacesAutocompleteController)
+
+import PopoverController from "@stimulus-components/popover"
+application.register("popover", PopoverController)
+
+import PrefetchController from "@stimulus-components/prefetch"
+application.register("prefetch", PrefetchController)
+
+import RailsNestedFormController from "@stimulus-components/rails-nested-form"
+application.register("rails-nested-form", RailsNestedFormController)
+
+import ReadMoreController from "@stimulus-components/read-more"
+application.register("read-more", ReadMoreController)
+
+import RemoteRailsController from "@stimulus-components/remote-rails"
+application.register("remote-rails", RemoteRailsController)
+
+// import RevealController from "@stimulus-components/reveal"
+application.register("reveal", RevealController)
+
+import ScrollProgressController from "@stimulus-components/scroll-progress"
+application.register("scroll-progress", ScrollProgressController)
+
+
+import ScrollRevealController from "@stimulus-components/scroll-reveal"
+application.register("scroll-reveal", ScrollRevealController)
+
+import ScrollToController from "@stimulus-components/scroll-to"
+application.register("scroll-to", ScrollToController)
+
+import SortableController from "@stimulus-components/sortable"
+application.register("sortable", SortableController)
+
+import SoundController from "@stimulus-components/sound"
+application.register("sound", SoundController)
+
+import SpeechRecognitionController from "@stimulus-components/speech-recognition"
+application.register("speech-recognition", SpeechRecognitionController)
+
+import TextareaAutogrowController from "timulus-textarea-autogrow"
+application.register("textarea-autogrow", TextareaAutogrowController)
+
+application.register("timeago", TimeagoController)
+import TimeagoController from "@stimulus-components/timeago"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

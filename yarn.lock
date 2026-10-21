@@ -206,6 +206,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@kurkle/color@^0.3.0":
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@kurkle/color/-/color-0.3.4.tgz#4d4ff677e1609214fc71c580125ddddd86abcabf"
+  integrity sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==
+
 "@napi-rs/wasm-runtime@^1.1.4":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@napi-rs/wasm-runtime/-/wasm-runtime-1.2.2.tgz#c70706532e5827c0932ca6bf43ee2c512f29c639"
@@ -306,6 +311,173 @@
   version "7.2.302"
   resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.2.302.tgz#f074632ee55aa1b5b16cd2be094b42981a71c322"
   integrity sha512-9JOPzUb7RCqIEWeoE78mPFd71fzyJ25LjeMzD45zQ75f41ca7BsgQVqiyrIuxDZ1yyZ4PdyxCMZF0KJlJ9qX0g==
+
+"@simonwep/pickr@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@simonwep/pickr/-/pickr-1.9.0.tgz#1640651ff04e76b48d805dc186c6513087a704a3"
+  integrity sha512-oEYvv15PyfZzjoAzvXYt3UyNGwzsrpFxLaZKzkOSd0WYBVwLd19iJerePDONxC1iF6+DpcswPdLIM2KzCJuYFg==
+  dependencies:
+    core-js "3.32.2"
+    nanopop "2.3.0"
+
+"@stimulus-components/animated-number@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/animated-number/-/animated-number-5.0.0.tgz#1ee3c5c919c451b4e538ca80fb489e4594ba0451"
+  integrity sha512-waOl3a/i5TJF8MYRiLSQqCTLYA0C20B2W7/UKbQOUKwnOGMrR0wHzNiJgfCveOE2Xl1WkeOlUjT0ntVgFXTyDA==
+
+"@stimulus-components/auto-submit@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/auto-submit/-/auto-submit-6.0.0.tgz#5649e2cca24834ff0d62b4ef1944393a8b0f5dfe"
+  integrity sha512-GBwjjnNuDZey9kdJinTGyrkIMCNVnPrTQvqihC0pBiwieIMfZIp+TT7Giee0Z0DS+pX6WdJweIeo8xEYD/VZJg==
+
+"@stimulus-components/carousel@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/carousel/-/carousel-6.0.0.tgz#8ee0c5b78da38322c21133cbd580c0412eedca13"
+  integrity sha512-Jj7lwJI9B13+Wyt6Q27G5b45w5wyjVC79RB6eIuWt9ZYMRbjPWsV2kDofpiM1wUZi7h1+xk+vAZorPPnvGd4dA==
+  dependencies:
+    swiper "^11.0.6"
+
+"@stimulus-components/character-counter@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/character-counter/-/character-counter-5.1.0.tgz#76e88d573f6a5dab97537525a8fd2c23015b895d"
+  integrity sha512-yKI1HUnBKqgBdR7q1Q4N8WvvC2XkQp4uha1voPelm2+6OmPL8+5krFGVCdmN7WloxeqLHVZWRSWcM+K/l/8rag==
+
+"@stimulus-components/chartjs@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/chartjs/-/chartjs-6.0.1.tgz#b370404cad54dbf0f285a7bf7512af90a8da7e3f"
+  integrity sha512-XNlLnKCZSz7+wwCdWmc3f+A181faD4DohC9r0YGwE8pDmebC5fzWLLFKlgCrJ48eYLkv1s+Wn1vem+lanPmg4w==
+  dependencies:
+    chart.js "^4.4.1"
+
+"@stimulus-components/checkbox-select-all@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/checkbox-select-all/-/checkbox-select-all-6.1.0.tgz#81da1ae620c2591ca247b32938a80e8c18b8b357"
+  integrity sha512-FTwLyYBrVw7WneVJy9sP/J3sCVxx8/mz7U+tDJhQsVrlfM2sCyVXRNMexzb7vt/STTqz9+crN9MeWFv52hxh5Q==
+
+"@stimulus-components/clipboard@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/clipboard/-/clipboard-5.0.0.tgz#1d119c4ba8827c6c11c2e1b9214d0de79bc0cc87"
+  integrity sha512-gbwU1sVBiKfMGGCt6oyXx9mGD+cEcHBSqaz//5UVepoQqzl2jYEUWQGFIO0f48LMOamEQwR1azQKfHq6llv6oA==
+
+"@stimulus-components/color-picker@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/color-picker/-/color-picker-2.0.0.tgz#1ab5be033d753a88155e2aa75c421ae1443328f5"
+  integrity sha512-ITQGvQ1RNLsoiZMmlc6R60pn36UuGD3lLv76LMRcipUbp1Sn3EenkMf5fABRd8MKz2ZIbJcTqZlMx4+I8FyHXA==
+  dependencies:
+    "@simonwep/pickr" "1.9.0"
+
+"@stimulus-components/confirmation@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/confirmation/-/confirmation-1.0.1.tgz#02b06ab8653036b4e24b0752b6baf9c6d2bfc0a2"
+  integrity sha512-Sg7d0ePf3IT750n3ZANWjcoOoEpnLsltWHtYcly9gKLDABUUmQBkGCdEmU8BSOYQUrVBMv3fNDUR+4PqeTzTpw==
+
+"@stimulus-components/content-loader@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/content-loader/-/content-loader-5.0.0.tgz#93a64e2924dc2e8853ca023d6420f2123d00d816"
+  integrity sha512-5ib9PveLI9VEbUwJQpp76OW9Q1Fc8CY7Yo9iVOPTFScwtUWOQJCnwR836osLzYbEIDEEpCfBsCRcIdn9PBGT8A==
+
+"@stimulus-components/dialog@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/dialog/-/dialog-1.0.1.tgz#879452b4efb817e16f44c09ac920ae618d12591e"
+  integrity sha512-7cpazrXeFKVmmuGnJOrykEvjRNRTOhLuI7SzgDdAlKWxM8ivBKziBHwjJGR96vCvSkoKwlGMGRcDzXgVRnr/7w==
+
+"@stimulus-components/dropdown@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/dropdown/-/dropdown-3.0.0.tgz#b85efa8ef06a94eac1a40e52ac920f5089789c8e"
+  integrity sha512-GY9Ez8T5Vbcad702seF4iuKZwv4f+VACtfO527l8vrFDFbGWWFyRljyK9FFXSPEkUC3/4PilVsYfPO2CMikkEg==
+  dependencies:
+    stimulus-use "^0.52.2"
+
+"@stimulus-components/hotkey@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/hotkey/-/hotkey-1.0.0.tgz#1171a12128b2ad1bad91827d78c819c025150058"
+  integrity sha512-CjD2TTwJxD26a/41pKGW/WCs/2rmzHpZ9+Vvr0sPW+r6eWrB5y+r7xSLBq4j1bz27CghFeG+JS3dtKMnzf+gCA==
+
+"@stimulus-components/lightbox@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/lightbox/-/lightbox-4.0.0.tgz#dbe56146a3d14582a13e568406292d52aa56cbb0"
+  integrity sha512-pj4PfnGANbc3Ef6I/5aPeRS8Tj2rK1b9dn8rlpJZs1K9narqM57ZtUTutHZsnOv95+4LqQVktj+auMgz+LKzjw==
+  dependencies:
+    lightgallery "^2.7.2"
+
+"@stimulus-components/notification@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/notification/-/notification-3.0.0.tgz#f67ec72bb0601ec33f597494def72e6ca93dd4a5"
+  integrity sha512-oZrIAcEayLNIhcetMJSLP6S9ryWjiFWBI5JKm639UuRsfSRyxiaHMddb3Xch/Umq6K24h/t2l1zVxxOm/UnMOA==
+  dependencies:
+    stimulus-use "^0.52.2"
+
+"@stimulus-components/password-visibility@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/password-visibility/-/password-visibility-3.0.0.tgz#314c1bae571ba13b9a4da6014f3e5c5b776fe4cc"
+  integrity sha512-ikyuZ/4VX4YrCckVHDc4H6UkTr5UjtkxSH+UdlEIgP9v93W1Bbvnoao0hgQODm8cvNWigmpLpKoGUzgyjBlrdw==
+
+"@stimulus-components/popover@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/popover/-/popover-7.0.0.tgz#0bd6b802536f4369ed953e8cf649495545b4b03c"
+  integrity sha512-GRO/vP5XfWs/JXFqnyW3cSNWMLGh5MTrwwoQ/uBOgzVEU6P5zoAIGhOQixJ+nZeOWW6cW6hy/zh2pwUgJ345uQ==
+
+"@stimulus-components/prefetch@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/prefetch/-/prefetch-4.0.0.tgz#1e7441a942855f9dc164d9cbda1d594cc6c7700f"
+  integrity sha512-GftWGUm1PnFWtqbniN2QgPQorkfEDWuXUXSOU/mAOueFAwLE0pJls3PPOpvAsxA3AfvsE9uN+pTbBOEs+kwqdA==
+
+"@stimulus-components/rails-nested-form@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/rails-nested-form/-/rails-nested-form-5.0.0.tgz#b443ad8ba5220328cfd704ca956ebf95ab8c4848"
+  integrity sha512-qrmmurT+KBPrz9iBlyrgJa6Di8i0j328kSk2SUR53nK5W0kDhw1YxVC91aUR+7EsFKiwJT1iB7oDSwpDhDQPeA==
+
+"@stimulus-components/read-more@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/read-more/-/read-more-5.0.0.tgz#125b6e23a86afd97309a6148b911f35075a44f40"
+  integrity sha512-SwpdWrLOz9u/fuo6aTu5DjoyTnbixCB7RO3b63TTZ8GVjEiNcynu4ZEveBg+MNoc8ivZNqYBWI411Qn/fPtWtw==
+
+"@stimulus-components/remote-rails@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/remote-rails/-/remote-rails-5.0.0.tgz#af004044542bf3ccd2ffd9da95d2fc8d7cdc2654"
+  integrity sha512-suKrPRVeNyEu8z5ejYpPxuBbDZgNwzfKqWruAEMPak2jrqAmfRremikDyvPO4FR1GJDVDlpKd0aWql3poGTyQA==
+
+"@stimulus-components/reveal@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/reveal/-/reveal-5.0.0.tgz#87a17b91f8a556e3f3975740ebb3e760aea6fafc"
+  integrity sha512-0ShvvDiG4qNLyFUTDrjGiR9MWR6D9EiAJRUSKxTPHA5Cc2Ci/A4Qj7cHDCoK2ZGHhpESfK0LsR9xtySCN6FTQw==
+
+"@stimulus-components/scroll-progress@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/scroll-progress/-/scroll-progress-5.0.0.tgz#2e0208bcb5b103dc18eb6dda03416fab75e4f8a5"
+  integrity sha512-uv0Z84Q4bXFlEszcF9EO/GyX9hFfCsnbQeG+7yqd2zYJ0TumpjAJzwbM2uzcXIvbzEFoZ0yuqOCgaxWKhT2ClQ==
+
+"@stimulus-components/scroll-reveal@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/scroll-reveal/-/scroll-reveal-4.0.0.tgz#879d3ba5a09e144e562b30238460d7e37c9398bf"
+  integrity sha512-FapkBEHILdN49abPYVrs4OD+ngK8v3VbfzNBP21G80kqXxzDeXPV74TPsOT3udrkWRTiLoyr5kUd566geYPk1g==
+
+"@stimulus-components/scroll-to@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/scroll-to/-/scroll-to-5.0.1.tgz#5697578a0be4ee374880db62c2c68fcd49a6ae4a"
+  integrity sha512-teJlu+wQAw3Bl5vI2TJLzW0OxH8W05StYPlWZFUDjudJzhUZwuF27dfu+KH/PwEELWyRyiwC+msXlXXWSTeHmQ==
+
+"@stimulus-components/sortable@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/sortable/-/sortable-5.0.3.tgz#b8b64f954a05497fa6ca00f21557d466a2ebe47b"
+  integrity sha512-GSiu4CX2irR3gIuo3nsSNXlJsEvXVurC2caNTNshlGbsP0sHb70bLn7iiVib7iGSmLJdXdU6wCpD3AEnMKCt2Q==
+
+"@stimulus-components/sound@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/sound/-/sound-2.0.1.tgz#d252d0e6d6b5f30e28a45fbf6f9a597c8a338743"
+  integrity sha512-IJyfgPyItYiCnHFUUdFSgFT9XvsHTtvZOyjWfuLHUPJnWQUatpYpHQfaUvsp3Es5aJNCRsCs6Ub4VUaOPxmApQ==
+
+"@stimulus-components/speech-recognition@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/speech-recognition/-/speech-recognition-1.0.0.tgz#0f77f9405cce8fbcea373a868132735937ca8bdd"
+  integrity sha512-Y5SDroAavmsknIBk48idZrJyvhmBrhZU+b/uR0jtbDwKGPfi4DyJPXLGt6lAG1eYzTS7n8YTAU6czFNEPRgiKA==
+
+"@stimulus-components/timeago@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/timeago/-/timeago-5.0.2.tgz#2a4c180621ac3853621a5fa676e4015ad5dc2d22"
+  integrity sha512-Bt1tj2H3SgNbnQyq9Wv+7O3M4A1/mdQX0LIzq3irXTs1QMwUx3upQdkEsOMj/VVQVr3YIR680DRI4cKXknZDqQ==
+  dependencies:
+    date-fns "^3.6.0 || ^4"
 
 "@tailwindcss/cli@^4.3.3":
   version "4.3.3"
@@ -437,6 +609,23 @@ braces@^3.0.3:
   dependencies:
     fill-range "^7.1.1"
 
+chart.js@^4.4.1:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-4.5.1.tgz#19dd1a9a386a3f6397691672231cb5fc9c052c35"
+  integrity sha512-GIjfiT9dbmHRiYi6Nl2yFCq7kkwdkp1W/lp2J99rX0yo9tgJGn3lKQATztIjb5tVtevcBtIdICNWqlq5+E8/Pw==
+  dependencies:
+    "@kurkle/color" "^0.3.0"
+
+core-js@3.32.2:
+  version "3.32.2"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.32.2.tgz#172fb5949ef468f93b4be7841af6ab1f21992db7"
+  integrity sha512-pxXSw1mYZPDGvTQqEc5vgIb83jGQKFGYWY76z4a7weZXUolw3G+OvpZqSRcfYOoOVUQJYEPsWeQK8pKEnUtWxQ==
+
+"date-fns@^3.6.0 || ^4":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-4.4.0.tgz#806539edf45c616b2b76b5f78b88c56ed3c7e036"
+  integrity sha512-+1UMbeh68lH1SegH83CGWwpb6OHHbpSgr3+s5Eww5M4CAgswBpoWS0AjTOfEJ33HiYKz1hdj/KTFprzXHmq/6w==
+
 detect-libc@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
@@ -520,6 +709,11 @@ jiti@^2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-2.7.0.tgz#974228f2f4ca2bc21885a1797b45fea68e950c64"
   integrity sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==
+
+lightgallery@^2.7.2:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/lightgallery/-/lightgallery-2.9.0.tgz#b3b6e15169eb9b840f70e14d67b9ec0a213cc612"
+  integrity sha512-58Ud1DyhD2ao58t+kPEqSZrjFxg23tGd5ZKr75erm7q31g5xhUtWUJH3sTUkhHzlyJAKHj5eTrJ37HQRXG4Wbg==
 
 lightningcss-android-arm64@1.32.0:
   version "1.32.0"
@@ -615,6 +809,11 @@ mri@^1.2.0:
   resolved "https://registry.yarnpkg.com/mri/-/mri-1.2.0.tgz#6721480fec2a11a4889861115a48b6cbe7cc8f0b"
   integrity sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==
 
+nanopop@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/nanopop/-/nanopop-2.3.0.tgz#a5f672fba27d45d6ecbd0b59789c040072915123"
+  integrity sha512-fzN+T2K7/Ah25XU02MJkPZ5q4Tj5FpjmIYq4rvoHX4yb16HzFdCO6JxFFn5Y/oBhQ8no8fUZavnyIv9/+xkBBw==
+
 node-addon-api@^7.0.0:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-7.1.1.tgz#1aba6693b0f255258a049d621329329322aad558"
@@ -634,6 +833,31 @@ source-map-js@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.2.1.tgz#1ce5650fddd87abc099eda37dcff024c2667ae46"
   integrity sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==
+
+stimulus-glow@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/stimulus-glow/-/stimulus-glow-0.3.0.tgz#bddd4fbf67d82c91f202a1eccafff9cbb4bbc613"
+  integrity sha512-NVG9lhfaVM+jnJk7zp59aYlR/tI1J+AI2GQCgUMXmv0unxw3ofHnes832b2SPRLozsV91k/1Q8o476EXa5Q3Uw==
+
+stimulus-places-autocomplete@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/stimulus-places-autocomplete/-/stimulus-places-autocomplete-0.5.0.tgz#a18603ee629ec0944c4adae6b76b3fed515e1e1a"
+  integrity sha512-9cVHWDXlkewELruJlbkNjLm4izybkOnLKQLUX/5F18ht5Dev+4/p+venaTfcHOkX9lyVj1qDz/SAiAjZnLx7tQ==
+
+stimulus-textarea-autogrow@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/stimulus-textarea-autogrow/-/stimulus-textarea-autogrow-4.1.0.tgz#faa2f7952062c4508b1566478dc203af7f24f632"
+  integrity sha512-hYz+xN3VZiO+eLl+zok4yvhH+mW5WkvOJEExyVP3J97dWQzc/qPDFdAM1EDJvfUIuRzJVq/WJynqqQwiied5iw==
+
+stimulus-use@^0.52.2:
+  version "0.52.3"
+  resolved "https://registry.yarnpkg.com/stimulus-use/-/stimulus-use-0.52.3.tgz#d6f35fa93277274957a2ed98a7b04b4d702cb1d6"
+  integrity sha512-stZ5dID6FUrGCR/ChWUa0FT5Z8iqkzT6lputOAb50eF+Ayg7RzJj4U/HoRlp2NV333QfvoRidru9HLbom4hZVw==
+
+swiper@^11.0.6:
+  version "11.2.10"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-11.2.10.tgz#ed0b17286b56f7fe8d4b46ed61e6e0bd8daaccad"
+  integrity sha512-RMeVUUjTQH+6N3ckimK93oxz6Sn5la4aDlgPzB+rBrG/smPdCTicXyhxa+woIpopz+jewEloiEE3lKo1h9w2YQ==
 
 tailwindcss@4.3.3, tailwindcss@^4.3.3:
   version "4.3.3"
