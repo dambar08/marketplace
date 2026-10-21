@@ -105,7 +105,7 @@ GEM
     crass (1.0.7)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
-    dalli (5.0.6)
+    dalli (5.2.2)
       logger
     date (3.5.1)
     debug (1.11.1)
